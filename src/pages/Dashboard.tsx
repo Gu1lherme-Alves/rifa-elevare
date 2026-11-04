@@ -15,7 +15,6 @@ import {
   Copy,
   Check,
   Trophy,
-  Sparkles,
   TrendingUp,
   ShieldAlert,
 } from 'lucide-react'
@@ -209,7 +208,7 @@ export function Dashboard() {
         p_user_id: user.id,
       })
       if (error) throw error
-      toast.success('Pagamento confirmado com sucesso!')
+      toast.success('Pagamento confirmado!')
       setShowDetailModal(false)
       setSelectedDetailNumber(null)
       fetchNumbers()
@@ -230,7 +229,7 @@ export function Dashboard() {
         p_user_id: user.id,
       })
       if (error) throw error
-      toast.success('Número liberado com sucesso!')
+      toast.success('Número liberado!')
       setShowDetailModal(false)
       setSelectedDetailNumber(null)
       fetchNumbers()
@@ -259,14 +258,14 @@ export function Dashboard() {
   if (loading) {
     return (
       <div className="space-y-6">
-        <div className="bg-gradient-to-br from-zinc-900 to-zinc-950 border border-emerald-500/20 rounded-3xl p-6 animate-pulse">
-          <div className="h-7 bg-zinc-800 rounded w-1/3 mb-4" />
-          <div className="h-4 bg-zinc-800 rounded w-2/3" />
+        <div className="bg-[#1F4D2E] border border-[#2D5A3D] rounded-2xl p-6 animate-pulse">
+          <div className="h-7 bg-[#2D5A3D] rounded w-1/3 mb-4" />
+          <div className="h-4 bg-[#2D5A3D] rounded w-2/3" />
         </div>
-        <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6 animate-pulse">
+        <div className="bg-[#1A3D28] border border-[#2D5A3D] rounded-2xl p-6 animate-pulse">
           <div className="grid grid-cols-5 sm:grid-cols-10 gap-2">
             {Array.from({ length: 40 }).map((_, i) => (
-              <div key={i} className="h-12 bg-zinc-800 rounded-xl" />
+              <div key={i} className="h-12 bg-[#2D5A3D] rounded-lg" />
             ))}
           </div>
         </div>
@@ -277,109 +276,91 @@ export function Dashboard() {
   return (
     <div className="space-y-6 pb-12">
       {/* ============================================================== */}
-      {/* CABEÇALHO PARA VISITANTES PÚBLICOS (COM VIDA, CONTRASTE E COR)  */}
+      {/* CABEÇALHO PARA VISITANTES PÚBLICOS (SÓBRIO, BÁSICO E ELEGANTE)  */}
       {/* ============================================================== */}
       {!isAuthenticated ? (
-        <div className="space-y-5">
-          {/* Hero Banner Ilustrativo com Prêmio */}
-          <div className="relative bg-gradient-to-br from-[#133320] via-[#0b2114] to-zinc-950 border border-emerald-500/30 rounded-3xl overflow-hidden shadow-[0_0_60px_-15px_rgba(16,185,129,0.25)]">
-            {/* Ambient Top Glow */}
-            <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative grid grid-cols-1 md:grid-cols-12 items-center">
+        <div className="space-y-4">
+          {/* Card Principal com o Cartaz e Informações */}
+          <div className="bg-[#1F4D2E] border border-[#2D5A3D] rounded-2xl overflow-hidden shadow-lg">
+            <div className="grid grid-cols-1 md:grid-cols-12 items-center">
               {/* Imagem do Cartaz Oficial */}
-              <div className="md:col-span-5 p-4 sm:p-6 flex justify-center bg-black/25">
+              <div className="md:col-span-5 p-4 sm:p-5 flex justify-center bg-[#0F2A1A]/40">
                 <img
                   src="/banner-rifa.jpg"
                   alt="Cartaz Rifa ELEVARE"
-                  className="rounded-2xl shadow-2xl max-h-[380px] w-auto object-contain border border-emerald-400/20 hover:scale-[1.01] transition-transform duration-300 ring-1 ring-white/10"
+                  className="rounded-xl max-h-[340px] w-auto object-contain border border-[#2D5A3D]"
                 />
               </div>
 
-              {/* Informações de Destaque */}
-              <div className="md:col-span-7 p-6 sm:p-8 space-y-4 text-center md:text-left">
-                {/* Badge bem discreto e reduzido (feedback: "diminua") */}
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/25 text-emerald-300 text-[10px] font-semibold tracking-wider uppercase">
-                  <Sparkles size={11} className="text-amber-400" />
-                  <span>Projeto Acadêmico FECAP</span>
-                </div>
+              {/* Informações */}
+              <div className="md:col-span-7 p-5 sm:p-6 space-y-3.5 text-center md:text-left">
+                {/* Badge discreto */}
+                <span className="inline-block px-2.5 py-0.5 rounded text-[11px] font-medium text-[#7FB069] bg-[#0F2A1A] border border-[#2D5A3D]">
+                  Projeto Acadêmico FECAP
+                </span>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-none drop-shadow-sm">
-                  RIFA <span className="bg-gradient-to-r from-emerald-400 via-lime-300 to-amber-300 bg-clip-text text-transparent">ELEVARE</span>
+                <h1 className="text-2xl sm:text-3xl font-bold text-[#F5F2E8] tracking-tight">
+                  RIFA <span className="text-[#7FB069]">ELEVARE</span>
                 </h1>
 
-                <p className="text-zinc-200 text-sm sm:text-base leading-relaxed max-w-xl font-medium">
-                  Sua chance de fazer o bem para comunidades vulneráveis e ainda concorrer a prêmios incríveis!
+                <p className="text-[#F5F2E8]/80 text-sm leading-relaxed max-w-xl">
+                  Arrecadação de alimentos não perecíveis para comunidades em vulnerabilidade. Participe e concorra!
                 </p>
 
-                {/* Card de Prêmio e Preço (sem menção a quantidade total) */}
-                <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-zinc-950/70 to-emerald-950/40 border border-amber-400/30 shadow-inner space-y-2.5">
-                  <div className="flex items-center justify-center md:justify-start gap-2.5 font-bold text-base sm:text-lg">
-                    <Trophy className="w-5 h-5 shrink-0 text-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)]" />
-                    <span className="text-white font-extrabold">
-                      1 Alexa Echo Dot <span className="text-amber-400 font-normal">OU</span>{' '}
-                      <span className="text-amber-300 font-black">R$ 400,00 no Pix</span>
-                    </span>
+                {/* Box de Prêmio e Valor */}
+                <div className="p-3.5 rounded-xl bg-[#163322] border border-[#2D5A3D] space-y-2">
+                  <div className="flex items-center justify-center md:justify-start gap-2 text-sm sm:text-base font-semibold text-[#F5F2E8]">
+                    <Trophy className="w-4 h-4 text-[#7FB069] shrink-0" />
+                    <span>1 Alexa Echo Dot <span className="text-[#F5F2E8]/50 font-normal">OU</span> R$ 400,00 no Pix</span>
                   </div>
 
-                  <div className="flex items-center justify-center md:justify-start gap-3">
-                    <span className="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-400 to-lime-400 text-zinc-950 font-black text-xs sm:text-sm shadow-md shadow-emerald-500/25">
+                  <div className="flex items-center justify-center md:justify-start">
+                    <span className="px-2.5 py-1 rounded bg-[#7FB069] text-[#0F2A1A] font-bold text-xs">
                       R$ 10,00 cada número
                     </span>
                   </div>
                 </div>
 
-                {/* Chave Pix Rápida */}
-                <div className="flex flex-col sm:flex-row items-center gap-2 pt-1">
-                  <div className="w-full sm:flex-1 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-zinc-950/80 border border-emerald-500/20 text-xs text-emerald-300 font-mono shadow-inner">
+                {/* Chave Pix */}
+                <div className="flex flex-col sm:flex-row items-center gap-2 pt-0.5">
+                  <div className="w-full sm:flex-1 flex items-center justify-between px-3 py-2 rounded-lg bg-[#163322] border border-[#2D5A3D] text-xs text-[#F5F2E8] font-mono">
                     <span className="truncate">{settings?.pix_key || 'elevare.fecap@gmail.com'}</span>
-                    <span className="text-[10px] text-zinc-400 ml-2 uppercase font-sans font-bold">Chave Pix</span>
+                    <span className="text-[10px] text-[#F5F2E8]/40 ml-2 uppercase font-sans">Pix</span>
                   </div>
                   <button
                     onClick={handleCopyPix}
-                    className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-lime-500 hover:brightness-110 text-zinc-950 text-xs font-black transition-all cursor-pointer shadow-md shadow-emerald-500/20 active:scale-95 shrink-0"
+                    className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#7FB069] hover:bg-[#8ec277] text-[#0F2A1A] text-xs font-bold transition-colors cursor-pointer shrink-0"
                   >
                     {pixCopied ? <Check size={14} /> : <Copy size={14} />}
-                    <span>{pixCopied ? 'Chave Copiada!' : 'Copiar Pix'}</span>
+                    <span>{pixCopied ? 'Copiado!' : 'Copiar Chave'}</span>
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Card de Progresso: APENAS PORCENTAGEM (zero menção a números) */}
-          <div className="bg-gradient-to-br from-zinc-900/90 via-[#0e2718]/80 to-zinc-950 border border-emerald-500/25 rounded-2xl p-5 shadow-xl space-y-3">
-            <div className="flex items-baseline justify-between">
-              <div>
-                <h3 className="text-xs uppercase tracking-wider font-extrabold text-emerald-400 flex items-center gap-1.5">
-                  <TrendingUp size={16} />
-                  <span>Progresso da Rifa</span>
-                </h3>
-                <p className="text-xs text-zinc-300 mt-0.5">
-                  A arrecadação está a todo vapor! Escolha seu número da sorte.
-                </p>
+          {/* Barra de Progresso Sóbria: APENAS PORCENTAGEM */}
+          <div className="bg-[#1F4D2E] border border-[#2D5A3D] rounded-2xl p-4 shadow-sm space-y-2.5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 text-xs font-semibold text-[#F5F2E8]">
+                <TrendingUp size={15} className="text-[#7FB069]" />
+                <span>Progresso da Rifa</span>
               </div>
 
-              {/* Porcentagem Grande com Gradiente Vibrante */}
               <div className="text-right">
-                <span className="text-3xl sm:text-4xl font-black tracking-tight bg-gradient-to-r from-emerald-400 via-lime-300 to-amber-300 bg-clip-text text-transparent drop-shadow-sm">
+                <span className="text-2xl font-bold text-[#7FB069]">
                   {progressPercent}%
                 </span>
               </div>
             </div>
 
-            {/* Barra de Progresso com Brilho e Gradiente */}
-            <div className="w-full h-4 bg-zinc-950 rounded-full overflow-hidden p-0.5 border border-emerald-500/20 shadow-inner">
+            {/* Barra */}
+            <div className="w-full h-2.5 bg-[#0F2A1A] rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-emerald-500 via-lime-400 to-amber-300 rounded-full transition-all duration-1000 ease-out shadow-[0_0_15px_rgba(74,222,128,0.5)]"
+                className="h-full bg-[#7FB069] rounded-full transition-all duration-700 ease-out"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
-
-            <p className="text-[11px] text-zinc-400 text-center pt-0.5 italic">
-              "Doar hoje. Transformar amanhã." — 100% da arrecadação é revertida em alimentos não perecíveis.
-            </p>
           </div>
         </div>
       ) : (
@@ -387,40 +368,40 @@ export function Dashboard() {
         /* CABEÇALHO PARA ADMINISTRADOR AUTENTICADO                       */
         /* ============================================================== */
         <div className="space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-elevare-card border border-elevare-border rounded-2xl p-5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-[#1F4D2E] border border-[#2D5A3D] rounded-2xl p-5">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2.5 py-0.5 rounded-lg bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                <span className="px-2.5 py-0.5 rounded text-xs font-bold bg-[#E6C547]/20 text-[#E6C547] uppercase">
                   Painel de Controle
                 </span>
-                <span className="text-xs text-elevare-text/40">Logado como Admin</span>
+                <span className="text-xs text-[#F5F2E8]/50">Logado como Admin</span>
               </div>
-              <h1 className="text-2xl font-bold text-elevare-text mt-1 flex items-center gap-2">
-                <Leaf className="w-6 h-6 text-emerald-400" />
+              <h1 className="text-2xl font-bold text-[#F5F2E8] mt-1 flex items-center gap-2">
+                <Leaf className="w-6 h-6 text-[#7FB069]" />
                 Gerenciamento Rifa ELEVARE
               </h1>
             </div>
 
             {settings?.raffle_drawn && (
-              <div className="flex items-center gap-2 bg-amber-400/20 border border-amber-400/40 rounded-xl px-4 py-2">
-                <Trophy className="w-5 h-5 text-amber-400" />
-                <span className="text-amber-300 font-semibold text-sm">
+              <div className="flex items-center gap-2 bg-[#E6C547]/20 border border-[#E6C547]/40 rounded-xl px-4 py-2">
+                <Trophy className="w-5 h-5 text-[#E6C547]" />
+                <span className="text-[#E6C547] font-semibold text-sm">
                   Sorteada! Ganhador: nº {settings.raffle_winner_number}
                 </span>
               </div>
             )}
           </div>
 
-          {/* Cards Completos de Gestão Administrativa */}
+          {/* Cards de Gestão */}
           <StatsCards numbers={numbers} buyersCount={buyersCount} settings={settings} />
 
-          {/* Alerta de Números Aguardando Autorização */}
+          {/* Alerta de Pendentes */}
           {reservedCount > 0 && (
-            <div className="p-4 rounded-xl bg-amber-400/15 border border-amber-400/40 flex items-center justify-between gap-3 text-amber-300">
-              <div className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold">
-                <ShieldAlert className="w-5 h-5 shrink-0" />
+            <div className="p-3.5 rounded-xl bg-[#E6C547]/15 border border-[#E6C547]/40 flex items-center justify-between gap-3 text-[#E6C547]">
+              <div className="flex items-center gap-2 text-xs sm:text-sm font-semibold">
+                <ShieldAlert className="w-4 h-4 shrink-0" />
                 <span>
-                  Existem <strong>{reservedCount}</strong> número(s) aguardando sua autorização / validação de comprovante!
+                  Existem <strong>{reservedCount}</strong> número(s) aguardando validação de comprovante!
                 </span>
               </div>
               <span className="text-xs underline cursor-pointer hover:text-white" onClick={() => setFilter('reserved')}>
@@ -434,18 +415,16 @@ export function Dashboard() {
       {/* ============================================================== */}
       {/* GRADE DOS NÚMEROS                                              */}
       {/* ============================================================== */}
-      <div className="bg-gradient-to-b from-[#0c2214] via-[#09190e] to-zinc-950 border border-emerald-500/20 rounded-3xl p-4 sm:p-6 shadow-2xl space-y-4">
-        <div className="border-b border-emerald-500/10 pb-3 flex items-center justify-between flex-wrap gap-2">
-          <div>
-            <h2 className="text-base sm:text-lg font-black text-white flex items-center gap-2">
-              <span>Escolha seus Números da Sorte</span>
-            </h2>
-            <p className="text-xs text-zinc-300">
-              {isAuthenticated
-                ? 'Selecione números para vender ou clique nos amarelos/cinzas para gerenciar.'
-                : 'Toque nos números verdes disponíveis para escolher e garantir a sua chance!'}
-            </p>
-          </div>
+      <div className="bg-[#1A3D28] border border-[#2D5A3D] rounded-2xl p-4 sm:p-5 shadow-sm space-y-4">
+        <div className="border-b border-[#2D5A3D] pb-3">
+          <h2 className="text-base font-bold text-[#F5F2E8]">
+            Escolha seus Números
+          </h2>
+          <p className="text-xs text-[#F5F2E8]/60 mt-0.5">
+            {isAuthenticated
+              ? 'Selecione números para registrar venda ou gerencie os números pendentes.'
+              : 'Toque nos números verdes disponíveis para escolher os seus.'}
+          </p>
         </div>
 
         <NumberGrid
@@ -463,86 +442,78 @@ export function Dashboard() {
       </div>
 
       {/* ============================================================== */}
-      {/* RODAPÉ PÚBLICO                                                 */}
+      {/* RODAPÉ                                                         */}
       {/* ============================================================== */}
-      <footer className="bg-zinc-950/80 border border-emerald-500/20 rounded-2xl p-6 md:p-8 space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <footer className="bg-[#1F4D2E] border border-[#2D5A3D] rounded-2xl p-5 sm:p-6 space-y-5 text-[#F5F2E8]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* Prêmio */}
           <div>
-            <h3 className="text-emerald-400 font-bold text-base mb-2 flex items-center gap-2">
-              <Trophy className="w-4 h-4 text-amber-400" />
-              Premiação Oficial
+            <h3 className="text-[#7FB069] font-bold text-sm mb-1.5 flex items-center gap-1.5">
+              <Trophy className="w-4 h-4" />
+              Prêmio
             </h3>
-            <p className="text-zinc-300 text-xs sm:text-sm leading-relaxed font-medium">
-              1 Alexa Echo Dot ou R$ 400,00 no Pix direto na sua conta.
+            <p className="text-xs text-[#F5F2E8]/80 leading-relaxed">
+              1 Alexa Echo Dot ou R$ 400,00 no Pix.
             </p>
-            <p className="mt-2 text-amber-300 font-black text-sm">
-              Apenas R$ 10,00 cada número!
+            <p className="mt-1 text-[#F5F2E8] font-bold text-xs">
+              R$ 10,00 cada número.
             </p>
           </div>
 
           {/* Chave Pix e WhatsApp */}
           <div>
-            <h3 className="text-emerald-400 font-bold text-base mb-2">
-              Chave Pix Oficial
+            <h3 className="text-[#7FB069] font-bold text-sm mb-1.5">
+              Chave Pix
             </h3>
             <button
               onClick={handleCopyPix}
-              className="flex items-center gap-2 bg-[#0c1f13] border border-emerald-500/20 rounded-xl px-3.5 py-2.5 text-zinc-200 text-xs hover:border-emerald-400/50 transition-colors w-full cursor-pointer"
+              className="flex items-center gap-2 bg-[#163322] border border-[#2D5A3D] rounded-lg px-3 py-2 text-[#F5F2E8] text-xs hover:border-[#7FB069] transition-colors w-full cursor-pointer"
             >
               <span className="truncate flex-1 text-left font-mono">{settings?.pix_key || 'elevare.fecap@gmail.com'}</span>
-              {pixCopied ? (
-                <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-              ) : (
-                <Copy className="w-4 h-4 text-zinc-400 shrink-0" />
-              )}
+              {pixCopied ? <Check className="w-3.5 h-3.5 text-[#7FB069] shrink-0" /> : <Copy className="w-3.5 h-3.5 text-[#F5F2E8]/40 shrink-0" />}
             </button>
             <a
               href="https://wa.me/5511993309871"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs text-emerald-400 hover:text-emerald-300 mt-2.5 font-bold transition-colors"
+              className="flex items-center gap-1.5 text-xs text-[#7FB069] hover:underline mt-2 font-medium"
             >
-              <WhatsAppIcon className="w-4 h-4 shrink-0" />
-              <span>Dúvidas? Fale conosco no WhatsApp: (11) 99330-9871</span>
+              <WhatsAppIcon className="w-3.5 h-3.5 shrink-0" />
+              <span>WhatsApp: (11) 99330-9871</span>
             </a>
           </div>
 
-          {/* Redes Sociais */}
+          {/* Links */}
           <div>
-            <h3 className="text-emerald-400 font-bold text-base mb-2">
-              Acompanhe a ELEVARE
+            <h3 className="text-[#7FB069] font-bold text-sm mb-1.5">
+              ELEVARE
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-1.5 text-xs text-[#F5F2E8]/80">
               <a
                 href={settings?.instagram_url || 'https://www.instagram.com/elevare.doe'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-zinc-300 hover:text-emerald-300 transition-colors text-xs font-medium"
+                className="flex items-center gap-1.5 hover:text-[#7FB069] transition-colors"
               >
-                <InstagramIcon className="w-4 h-4 text-pink-400" />
-                <span>Instagram: @elevare.doe</span>
+                <InstagramIcon className="w-3.5 h-3.5" />
+                <span>@elevare.doe</span>
               </a>
               <a
                 href={settings?.website_url || 'https://liderancasempaticas.com/'}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-zinc-300 hover:text-emerald-300 transition-colors text-xs font-medium"
+                className="flex items-center gap-1.5 hover:text-[#7FB069] transition-colors"
               >
-                <Globe className="w-4 h-4 text-sky-400" />
+                <Globe className="w-3.5 h-3.5" />
                 <span>Lideranças Empáticas</span>
               </a>
             </div>
           </div>
         </div>
 
-        <div className="pt-5 border-t border-zinc-800 text-center">
-          <p className="text-emerald-400 italic text-base font-bold">
-            "Doar hoje. Transformar amanhã."
-          </p>
-          <p className="text-zinc-500 text-[11px] mt-1">
-            Projeto ELEVARE &copy; {new Date().getFullYear()} — FECAP (Fundação Escola de Comércio Álvares Penteado)
-          </p>
+        <div className="pt-4 border-t border-[#2D5A3D] text-center text-xs text-[#F5F2E8]/50">
+          <p className="text-[#7FB069] font-medium italic">"Doar hoje. Transformar amanhã."</p>
+          <p className="mt-0.5">Projeto ELEVARE &copy; {new Date().getFullYear()} — FECAP</p>
         </div>
       </footer>
 

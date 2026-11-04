@@ -253,7 +253,7 @@ export function PublicCheckoutModal({
                 </button>
                 <button
                   type="submit"
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-elevare-accent text-elevare-bg font-bold text-sm hover:bg-elevare-accent/90 transition-transform active:scale-95 cursor-pointer shadow-lg shadow-elevare-accent/20"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-elevare-accent text-elevare-bg font-bold text-sm hover:bg-[#8ec277] transition-colors cursor-pointer"
                 >
                   <span>Continuar para o Pix</span>
                   <ArrowRight size={16} />
@@ -326,7 +326,7 @@ export function PublicCheckoutModal({
                   type="button"
                   disabled={loading}
                   onClick={handleAdvanceToWhatsApp}
-                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-elevare-accent text-elevare-bg font-bold text-sm hover:bg-elevare-accent/90 transition-transform active:scale-95 cursor-pointer disabled:opacity-50 shadow-lg shadow-elevare-accent/20"
+                  className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-elevare-accent text-elevare-bg font-bold text-sm hover:bg-[#8ec277] transition-colors cursor-pointer disabled:opacity-50"
                 >
                   {loading ? (
                     <span>Bloqueando números...</span>
