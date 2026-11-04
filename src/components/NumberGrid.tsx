@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Search, Filter, ShoppingBag } from 'lucide-react'
+import { Filter, ShoppingBag } from 'lucide-react'
 import { RaffleNumber, FilterType } from '../types'
 import { cn } from '../lib/utils'
 
@@ -10,8 +10,8 @@ interface NumberGridProps {
   onSell: () => void
   filter: FilterType
   setFilter: (filter: FilterType) => void
-  searchQuery: string
-  setSearchQuery: (query: string) => void
+  searchQuery?: string
+  setSearchQuery?: (query: string) => void
   isAuthenticated: boolean
   onNumberClick: (num: RaffleNumber) => void
 }
@@ -23,8 +23,6 @@ export function NumberGrid({
   onSell,
   filter,
   setFilter,
-  searchQuery,
-  setSearchQuery,
   isAuthenticated,
   onNumberClick,
 }: NumberGridProps) {
@@ -39,13 +37,8 @@ export function NumberGrid({
       }
     }
 
-    if (searchQuery.trim()) {
-      const query = searchQuery.trim()
-      result = result.filter((n) => String(n.number).includes(query))
-    }
-
     return result.sort((a, b) => a.number - b.number)
-  }, [numbers, filter, searchQuery, isAuthenticated])
+  }, [numbers, filter, isAuthenticated])
 
   const handleNumberClick = (num: RaffleNumber) => {
     if (num.status === 'available') {
@@ -107,27 +100,8 @@ export function NumberGrid({
 
   return (
     <div className="space-y-4">
-      {/* Search and Filters */}
-      <div className="space-y-3">
-        {/* Search Input */}
-        <div className="relative">
-          <Search
-            size={18}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-[#F5F2E8]/40"
-          />
-          <input
-            type="text"
-            placeholder={
-              isAuthenticated
-                ? 'Buscar por número...'
-                : 'Buscar número (ex: 7, 23, 77)...'
-            }
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-[#163322] border border-[#2D5A3D] rounded-xl text-[#F5F2E8] placeholder-[#F5F2E8]/30 focus:outline-none focus:border-[#7FB069] transition-all text-sm"
-          />
-        </div>
-
+      {/* Filters & Legend */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         {/* Filter Buttons */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
           <Filter size={15} className="text-[#F5F2E8]/40 shrink-0 hidden sm:block" />
@@ -151,25 +125,25 @@ export function NumberGrid({
         </div>
 
         {/* Legend */}
-        <div className="flex flex-wrap items-center gap-4 text-xs text-[#F5F2E8]/60 pt-1">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-3 text-xs text-[#F5F2E8]/60">
+          <div className="flex items-center gap-1.5">
             <span className="w-3.5 h-3.5 rounded bg-[#7FB069]" />
             <span>Disponível</span>
           </div>
 
           {isAuthenticated ? (
             <>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <span className="w-3.5 h-3.5 rounded bg-[#E6C547]" />
                 <span>Aguardando autorização</span>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <span className="w-3.5 h-3.5 rounded bg-[#182a20]" />
                 <span>Vendido</span>
               </div>
             </>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5">
               <span className="w-3.5 h-3.5 rounded bg-[#182a20]" />
               <span>Já escolhido</span>
             </div>
@@ -200,7 +174,7 @@ export function NumberGrid({
 
       {filteredNumbers.length === 0 && (
         <div className="text-center py-10 text-[#F5F2E8]/40">
-          <p className="text-sm">Nenhum número encontrado</p>
+          <p className="text-sm">Nenhum número encontrado nessa categoria</p>
         </div>
       )}
 

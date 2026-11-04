@@ -434,8 +434,6 @@ export function Dashboard() {
           onSell={handleOpenBuyModal}
           filter={filter}
           setFilter={setFilter}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
           isAuthenticated={isAuthenticated}
           onNumberClick={handleNumberDetail}
         />
