@@ -89,14 +89,14 @@ export function Layout() {
           <Outlet />
         </main>
 
-        {/* Botão discreto no canto inferior esquerdo para login de Adm/Vendedor */}
-        <div className="fixed bottom-4 left-4 z-40">
+        {/* Botão pequeno, discreto e fixo no canto inferior para login de Admin */}
+        <div className="fixed bottom-2 left-2 z-30">
           <NavLink
             to="/login"
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-elevare-card/90 hover:bg-elevare-card text-elevare-text/40 hover:text-elevare-accent border border-elevare-border/70 hover:border-elevare-accent/40 shadow-xl backdrop-blur-md text-xs font-medium transition-all duration-200 group cursor-pointer"
-            title="Acesso Administrativo"
+            className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-[#0F2A1A]/80 hover:bg-[#163322] border border-[#2D5A3D]/40 text-[#F5F2E8]/40 hover:text-[#7FB069] text-[10px] font-medium transition-all opacity-35 hover:opacity-100 cursor-pointer shadow-sm select-none"
+            title="Acesso do Administrador"
           >
-            <Lock size={14} className="text-elevare-accent/60 group-hover:text-elevare-accent group-hover:scale-110 transition-all" />
+            <Lock size={11} className="shrink-0" />
             <span>Área Restrita</span>
           </NavLink>
         </div>
