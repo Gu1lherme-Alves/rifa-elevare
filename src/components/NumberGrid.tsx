@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { Search, Filter, ShoppingBag } from 'lucide-react'
+import { Search, Filter, ShoppingBag, Sparkles } from 'lucide-react'
 import { RaffleNumber, FilterType } from '../types'
 import { cn } from '../lib/utils'
 
@@ -33,7 +33,6 @@ export function NumberGrid({
 
     if (filter !== 'all') {
       if (!isAuthenticated && filter === 'sold') {
-        // Para visitantes públicos, o filtro "sold" engloba tanto vendidos quanto reservados
         result = result.filter((n) => n.status === 'sold' || n.status === 'reserved')
       } else {
         result = result.filter((n) => n.status === filter)
@@ -60,25 +59,24 @@ export function NumberGrid({
     const isSelected = selectedNumbers.includes(num.number)
 
     if (isSelected) {
-      return 'bg-elevare-accent text-elevare-bg ring-4 ring-white ring-offset-2 ring-offset-elevare-bg scale-105 shadow-lg shadow-elevare-accent/40 font-extrabold'
+      return 'bg-gradient-to-br from-amber-300 via-amber-400 to-yellow-500 text-zinc-950 ring-4 ring-white ring-offset-2 ring-offset-[#0F2A1A] scale-110 font-black shadow-xl shadow-amber-400/40 z-10'
     }
 
     if (num.status === 'available') {
-      return 'bg-elevare-accent text-elevare-bg hover:bg-elevare-accent/80 hover:scale-105 cursor-pointer active:scale-95 shadow-sm'
+      return 'bg-gradient-to-b from-emerald-400 to-emerald-500 hover:from-lime-300 hover:to-emerald-400 text-zinc-950 font-extrabold hover:scale-105 active:scale-95 shadow-md shadow-emerald-950/40 cursor-pointer'
     }
 
-    // Para usuários não autenticados (público), reservados parecem vendidos para não haver confusão
+    // Para usuários públicos, números reservados ou vendidos aparecem como indisponíveis
     if (!isAuthenticated) {
-      return 'bg-zinc-800/80 text-zinc-500 line-through opacity-45 cursor-not-allowed select-none'
+      return 'bg-zinc-900/80 text-zinc-600 line-through opacity-35 cursor-not-allowed select-none border border-zinc-800/40'
     }
 
-    // Para administradores:
+    // Para o Administrador:
     if (num.status === 'reserved') {
-      return 'bg-elevare-yellow text-elevare-bg hover:bg-elevare-yellow/80 cursor-pointer font-bold animate-pulse'
+      return 'bg-amber-400 text-zinc-950 hover:bg-amber-300 cursor-pointer font-extrabold shadow-md shadow-amber-950/40 animate-pulse'
     }
 
-    // Vendido confirmado
-    return 'bg-zinc-800 text-zinc-500 line-through opacity-50 cursor-pointer'
+    return 'bg-zinc-900 text-zinc-600 line-through opacity-40 cursor-pointer border border-zinc-800/40'
   }
 
   const counts = useMemo(() => {
@@ -94,6 +92,7 @@ export function NumberGrid({
     }
   }, [numbers])
 
+  // Para o público: SEM quantidades de números nas abas
   const filterOptions = isAuthenticated
     ? [
         { key: 'all' as FilterType, label: 'Todos', count: counts.all },
@@ -102,9 +101,9 @@ export function NumberGrid({
         { key: 'sold' as FilterType, label: 'Vendidos', count: counts.sold },
       ]
     : [
-        { key: 'all' as FilterType, label: 'Todos', count: counts.all },
-        { key: 'available' as FilterType, label: 'Disponíveis', count: counts.available },
-        { key: 'sold' as FilterType, label: 'Já Escolhidos', count: counts.takenPublic },
+        { key: 'all' as FilterType, label: 'Todos', count: undefined },
+        { key: 'available' as FilterType, label: 'Disponíveis', count: undefined },
+        { key: 'sold' as FilterType, label: 'Já Escolhidos', count: undefined },
       ]
 
   return (
@@ -115,7 +114,7 @@ export function NumberGrid({
         <div className="relative">
           <Search
             size={18}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-elevare-text/40"
+            className="absolute left-3.5 top-1/2 -translate-y-1/2 text-emerald-400/60"
           />
           <input
             type="text"
@@ -126,52 +125,54 @@ export function NumberGrid({
             }
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 bg-elevare-input border border-elevare-border rounded-xl text-elevare-text placeholder-elevare-text/30 focus:outline-none focus:ring-2 focus:ring-elevare-accent/50 focus:border-elevare-accent/50 transition-all text-sm"
+            className="w-full pl-10 pr-4 py-3 bg-[#0c1f13] border border-emerald-500/20 focus:border-emerald-400/60 rounded-xl text-elevare-text placeholder-elevare-text/30 focus:outline-none focus:ring-2 focus:ring-emerald-400/30 transition-all text-sm shadow-inner"
           />
         </div>
 
         {/* Filter Buttons */}
         <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          <Filter size={16} className="text-elevare-text/40 shrink-0 hidden sm:block" />
+          <Filter size={16} className="text-emerald-400/50 shrink-0 hidden sm:block" />
           {filterOptions.map((opt) => (
             <button
               key={opt.key}
               onClick={() => setFilter(opt.key)}
               className={cn(
-                'px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer',
+                'px-4 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all duration-200 cursor-pointer',
                 filter === opt.key
-                  ? 'bg-elevare-accent text-elevare-bg shadow-sm'
-                  : 'bg-elevare-secondary/50 text-elevare-text/60 hover:bg-elevare-secondary hover:text-elevare-text'
+                  ? 'bg-gradient-to-r from-emerald-500 to-lime-500 text-zinc-950 shadow-md shadow-emerald-500/20'
+                  : 'bg-zinc-900/60 text-elevare-text/70 border border-emerald-500/10 hover:border-emerald-400/30 hover:text-elevare-text'
               )}
             >
               {opt.label}
-              <span className="ml-1 opacity-70">({opt.count})</span>
+              {opt.count !== undefined && (
+                <span className="ml-1 opacity-75">({opt.count})</span>
+              )}
             </button>
           ))}
         </div>
 
         {/* Legend */}
         <div className="flex flex-wrap items-center gap-4 text-xs text-elevare-text/60 pt-1">
-          <div className="flex items-center gap-1.5">
-            <span className="w-3.5 h-3.5 rounded bg-elevare-accent shadow-sm" />
-            <span>Disponível (toque para escolher)</span>
+          <div className="flex items-center gap-2">
+            <span className="w-3.5 h-3.5 rounded-lg bg-emerald-400 shadow-sm shadow-emerald-400/40" />
+            <span className="font-medium text-emerald-300">Disponível</span>
           </div>
 
           {isAuthenticated ? (
             <>
-              <div className="flex items-center gap-1.5">
-                <span className="w-3.5 h-3.5 rounded bg-elevare-yellow" />
-                <span>Aguardando autorização</span>
+              <div className="flex items-center gap-2">
+                <span className="w-3.5 h-3.5 rounded-lg bg-amber-400 shadow-sm shadow-amber-400/40" />
+                <span className="font-medium text-amber-300">Aguardando autorização</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <span className="w-3.5 h-3.5 rounded bg-zinc-800" />
-                <span>Vendido e Pago</span>
+              <div className="flex items-center gap-2">
+                <span className="w-3.5 h-3.5 rounded-lg bg-zinc-800" />
+                <span className="font-medium text-zinc-400">Vendido</span>
               </div>
             </>
           ) : (
-            <div className="flex items-center gap-1.5">
-              <span className="w-3.5 h-3.5 rounded bg-zinc-800 opacity-60" />
-              <span>Já escolhido</span>
+            <div className="flex items-center gap-2">
+              <span className="w-3.5 h-3.5 rounded-lg bg-zinc-800 border border-zinc-700/50" />
+              <span className="font-medium text-zinc-400">Já escolhido</span>
             </div>
           )}
         </div>
@@ -207,13 +208,16 @@ export function NumberGrid({
       {/* Floating Action Bottom Bar when numbers are selected */}
       {selectedNumbers.length > 0 && (
         <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-4 duration-200">
-          <div className="bg-elevare-card/95 border-2 border-elevare-accent rounded-2xl p-4 shadow-2xl shadow-black/80 backdrop-blur-md flex items-center justify-between gap-3">
+          <div className="bg-gradient-to-r from-zinc-950/95 via-[#0e2719]/95 to-zinc-950/95 border-2 border-emerald-400 rounded-2xl p-4 shadow-[0_0_50px_rgba(16,185,129,0.35)] backdrop-blur-xl flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-sm font-bold text-elevare-text truncate">
-                {selectedNumbers.length} {selectedNumbers.length === 1 ? 'número' : 'números'}{' '}
-                (R$ {selectedNumbers.length * 10},00)
+              <p className="text-sm font-black text-white flex items-center gap-1.5 truncate">
+                <Sparkles size={16} className="text-amber-400 shrink-0" />
+                <span>
+                  {selectedNumbers.length} {selectedNumbers.length === 1 ? 'número' : 'números'}{' '}
+                  <span className="text-emerald-400">(R$ {selectedNumbers.length * 10},00)</span>
+                </span>
               </p>
-              <p className="text-xs text-elevare-accent/90 truncate font-mono">
+              <p className="text-xs text-amber-300 truncate font-mono mt-0.5">
                 {selectedNumbers
                   .sort((a, b) => a - b)
                   .map((n) => String(n).padStart(3, '0'))
@@ -222,7 +226,7 @@ export function NumberGrid({
             </div>
             <button
               onClick={onSell}
-              className="flex items-center gap-2 px-5 py-3 bg-elevare-accent text-elevare-bg font-extrabold rounded-xl text-sm hover:bg-elevare-accent/90 active:scale-95 transition-all duration-150 whitespace-nowrap cursor-pointer shadow-lg shadow-elevare-accent/30"
+              className="flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-emerald-400 via-lime-400 to-amber-300 hover:brightness-110 text-zinc-950 font-black rounded-xl text-sm active:scale-95 transition-all duration-150 whitespace-nowrap cursor-pointer shadow-lg shadow-emerald-500/30"
             >
               <ShoppingBag size={18} />
               <span>{isAuthenticated ? 'Vender / Reservar' : 'Garantir Números 🍀'}</span>
