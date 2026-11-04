@@ -22,8 +22,8 @@ Web app mobile-first em tempo real para controle e gestão da rifa beneficente d
 | Perfil | Acesso | Capacidades |
 |---|---|---|
 | **Público** | Link aberto (sem login) | Visualiza status dos números em tempo real e dashboard geral (sem nenhum dado pessoal dos compradores). |
-| **Vendedor** | `vendedor@elevare.com` / `elevare123` | Registra vendas e reservas, seleciona múltiplos números, vê comprador e telefone dos números vendidos/reservados. |
-| **Administrador** | `admin@elevare.com` / `elevare123` | Tudo do vendedor + gerenciamento e ranking de vendedores, liberação/confirmação de qualquer número, exportação (CSV e WhatsApp), alteração de configurações e realização do sorteio oficial. |
+| **Vendedor** | Cadastrado pelo Admin | Registra vendas e reservas, seleciona múltiplos números, vê comprador e telefone dos números vendidos/reservados. |
+| **Administrador** | `admin@elevare.com` / `elevare123` | Tudo do vendedor + gerenciamento e cadastro de novos vendedores, liberação/confirmação de qualquer número, exportação (CSV e WhatsApp), alteração de configurações e realização do sorteio oficial. |
 
 ---
 

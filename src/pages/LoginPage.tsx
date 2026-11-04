@@ -45,7 +45,7 @@ export function LoginPage() {
         {/* Login Card */}
         <div className="bg-elevare-card border border-elevare-border rounded-2xl p-8 shadow-xl">
           <h2 className="text-xl font-semibold text-elevare-text mb-6 text-center">
-            Acesso do Vendedor
+            Área Restrita
           </h2>
 
           {error && (
